@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Query
 from sqlalchemy import desc
 
 from app.database import SessionLocal
@@ -19,12 +19,21 @@ def home():
     "/products",
     response_model=list[ProductResponse]
 )
-def get_products():
+def get_products(
+    category: str | None = Query(default=None)
+):
 
     db = SessionLocal()
 
+    query = db.query(Product)
+
+    if category:
+        query = query.filter(
+            Product.category == category
+        )
+
     products = (
-        db.query(Product)
+        query
         .order_by(desc(Product.created_at))
         .limit(20)
         .all()
