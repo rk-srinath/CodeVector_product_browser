@@ -1,13 +1,15 @@
-from fastapi import FastAPI, Query
+from fastapi import FastAPI
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import desc
 
-from fastapi.responses import FileResponse
 from app.database import SessionLocal
 from app.models import Product
 from app.schemas import ProductResponse
-from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -16,12 +18,20 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
+# Serve frontend files
+app.mount(
+    "/frontend",
+    StaticFiles(directory="frontend"),
+    name="frontend"
+)
+
 
 @app.get("/")
 def home():
     return {
         "message": "CodeVector API Running"
     }
+
 
 @app.get("/ui")
 def ui():
