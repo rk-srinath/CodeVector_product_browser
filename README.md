@@ -77,15 +77,15 @@ http://127.0.0.1:8000/docs
 
 ### API
 
-https://your-render-url.onrender.com/
+[https://your-render-url.onrender.com/](https://codevector-product-browser-slz4.onrender.com/)
 
 ### Swagger Docs
 
-https://your-render-url.onrender.com/docs
+[https://your-render-url.onrender.com/](https://codevector-product-browser-slz4.onrender.com/docs)
 
 ### UI
 
-https://your-render-url.onrender.com/ui
+[https://your-render-url.onrender.com/](https://codevector-product-browser-slz4.onrender.com/ui)
 
 ## AI Usage
 
