@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Query
 from sqlalchemy import desc
 
+from fastapi.responses import FileResponse
 from app.database import SessionLocal
 from app.models import Product
 from app.schemas import ProductResponse
@@ -21,6 +22,10 @@ def home():
     return {
         "message": "CodeVector API Running"
     }
+
+@app.get("/ui")
+def ui():
+    return FileResponse("frontend/index.html")
 
 
 @app.get(
