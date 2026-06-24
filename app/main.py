@@ -1,7 +1,8 @@
 from fastapi import FastAPI
-from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
+
 from sqlalchemy import desc
 
 from app.database import SessionLocal
@@ -10,6 +11,7 @@ from app.schemas import ProductResponse
 
 app = FastAPI()
 
+# CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
