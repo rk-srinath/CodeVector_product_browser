@@ -20,7 +20,9 @@ def home():
     response_model=list[ProductResponse]
 )
 def get_products(
-    category: str | None = Query(default=None)
+    category: str | None = None,
+    cursor: int | None = None,
+    limit: int = 20
 ):
 
     db = SessionLocal()
@@ -32,10 +34,15 @@ def get_products(
             Product.category == category
         )
 
+    if cursor:
+        query = query.filter(
+            Product.id < cursor
+        )
+
     products = (
         query
-        .order_by(desc(Product.created_at))
-        .limit(20)
+        .order_by(desc(Product.id))
+        .limit(limit)
         .all()
     )
 
